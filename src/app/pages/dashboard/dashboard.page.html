@@ -1,0 +1,64 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>List me!</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="dashboard-container">
+    <div class="dashboard-wrapper">
+      <h1 class="dashboard-title">Hello,<br/>Jonatas!</h1>
+      <list-me-card>
+        <div class="card-content">
+          <div class="profile-image"></div>
+          <div class="profile-info">
+            <h3 class="card-title">Jonatas Almeida</h3>
+            <p class="card-description">Front-End Developer</p>
+          </div>
+        </div>
+      </list-me-card>
+      <hr class="dashboard-divider"/>
+      <div class="dashboard-content">
+        <h3 class="dashboard-content-title">Activities</h3>
+        <div class="dashboard-search-header">
+          <div class="search-input">
+            <list-me-input placeholder="Search..." type="text"></list-me-input>
+          </div>
+          <list-me-button buttonTitle="Search" width="100px"></list-me-button>
+        </div>
+        <div class="data-grid-container">
+          <list-me-card *ngFor="let activity of activitiesList.data" [key]="activity._id">
+            <div class="card-dashboard-content">
+              <div class="dashboard-profile-image"></div>
+              <div class="dashboard-profile-info">
+                <h3 class="dashboard-card-title">{{activity.activity_title}}</h3>
+                <p class="dashboard-card-description">{{activity.activity_description}}</p>
+              </div>
+              <list-me-round-button top="0" right="0" (onClick)="deleteClickedActivity(activity)"></list-me-round-button>
+            </div>
+          </list-me-card>
+        </div>
+        <list-me-floating-button (onClick)="this.openModal = true"></list-me-floating-button>
+
+        <!-- Modal => add activity -->
+        <list-me-modal modalTitle="Add activity" [isModalOpen]="openModal" (closeModal)="closeModal($event)">
+          <form [formGroup]="activityForm">
+            <div class="modal-activity-name">
+              <label class="modal-label">Activity name:</label>
+              <list-me-input [ctrl]="activityTitleCtrl" placeholder="Type your activity name" type="text"></list-me-input>
+            </div>
+            <div class="modal-activity-description">
+              <label class="modal-label">Activity description:</label>
+              <list-me-input [ctrl]="activityDescriptionCtrl" placeholder="Type your description" type="text"></list-me-input>
+            </div>
+          </form>
+          <div class="modal-action-buttons">
+            <list-me-button buttonTitle="Add" width="100px" (onClick)="createActivity()"></list-me-button>
+            <list-me-button buttonTitle="Cancel" (onClick)="this.openModal = false" backgroundColor="#f2f2f2" fontColor="#222"></list-me-button>
+          </div>
+        </list-me-modal>
+      </div>
+      <list-me-back-button (onClick)="utilService.goToNextPage('/login')"></list-me-back-button>
+    </div>
+  </div>
+</ion-content>

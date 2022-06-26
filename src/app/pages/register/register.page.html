@@ -1,0 +1,23 @@
+
+<div class="register-container">
+  <div class="register-wrapper">
+    <h1>Register</h1>
+    <hr class="register-divider">
+    <form [formGroup]="userForm">
+      <div class="user-info-container">
+        <div class="user-info-section-one">
+          <list-me-input placeholder="User name" [ctrl]="usernameCtrl" type="text"></list-me-input>
+        </div>
+        <div class="user-info-section-one">
+          <list-me-input placeholder="E-mail" [ctrl]="userEmailCtrl" type="email"></list-me-input>
+        </div>
+      </div>
+      <list-me-input placeholder="Password" [ctrl]="userPasswordCtrl" margin="20px 0px" type="password"></list-me-input>
+      <list-me-input placeholder="Confirm password" [ctrl]="confirmPasswordCtrl" type="password"></list-me-input>
+      <list-me-button width="100%" margin="60px 0px" buttonTitle="Confirm Sing Up" (onClick)="createNewUser()"></list-me-button>
+    </form>
+  </div>
+  <list-me-back-button (onClick)="utilService.goToNextPage('/login')"></list-me-back-button>
+</div>
+
+<list-me-loading loadingText="Loading..." [open]="openModal"></list-me-loading>

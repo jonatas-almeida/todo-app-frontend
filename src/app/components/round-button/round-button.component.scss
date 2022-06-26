@@ -1,0 +1,13 @@
+.round-button-container {
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all .3s;
+}
+
+.round-button-container:active {
+    transform: scale(0.9);
+}

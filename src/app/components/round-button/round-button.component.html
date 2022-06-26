@@ -1,0 +1,12 @@
+<div class="round-button-container" [ngStyle]="{
+  width: width,
+  height: height,
+  backgroundColor: backgroundColor,
+  position: position,
+  top: top,
+  right: right
+}" (click)="onButtonClick($event)">
+  <ion-icon [name]="icon" [ngStyle]="{
+    color: iconColor
+  }"></ion-icon>
+</div>

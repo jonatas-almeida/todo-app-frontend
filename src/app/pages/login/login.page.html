@@ -1,0 +1,18 @@
+<div class="login-container">
+  <div class="login-wrapper">
+    <h3>welcome to</h3>
+    <h1>List Me!</h1>
+    <hr class="login-divider">
+    <form [formGroup]="loginForm">
+      <list-me-input placeholder="User name" type="text" [ctrl]="usernameCtrl" margin="10px 0px"></list-me-input>
+      <list-me-input placeholder="Password" type="password" [ctrl]="passwordCtrl" margin="10px 0px"></list-me-input>
+      <div class="action-buttons-container">
+        <list-me-button buttonTitle="Log In" width="200px" (onClick)="login()"></list-me-button>
+        <list-me-button buttonTitle="Register" width="110px" backgroundColor="#f2f2f2" fontColor="#222" (onClick)="utilService.goToNextPage('/register')"></list-me-button>
+      </div>
+    </form>
+    <list-me-button width="100%" buttonTitle="Login with Google" backgroundColor="transparent" fontColor="#0f3f6e"></list-me-button>
+  </div>
+</div>
+
+<list-me-loading loadingText="Loading..." [open]="openModal"></list-me-loading>

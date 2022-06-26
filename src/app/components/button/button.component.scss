@@ -1,0 +1,9 @@
+.btn-container {
+    width: 150px;
+    border-radius: 5px;
+    transition: all .3s;
+}
+
+.btn-container:active {
+    transform: scale(0.9);
+}
