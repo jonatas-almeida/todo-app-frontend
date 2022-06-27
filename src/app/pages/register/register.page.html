@@ -12,6 +12,9 @@
           <list-me-input placeholder="E-mail" [ctrl]="userEmailCtrl" type="email"></list-me-input>
         </div>
       </div>
+      <list-me-input placeholder="Full name" [ctrl]="this.userFullNameCtrl" margin="20px 0px" type="text" [ngStyle]="{
+        textTransform: 'captalize'
+      }"></list-me-input>
       <list-me-input placeholder="Password" [ctrl]="userPasswordCtrl" margin="20px 0px" type="password"></list-me-input>
       <list-me-input placeholder="Confirm password" [ctrl]="confirmPasswordCtrl" type="password"></list-me-input>
       <list-me-button width="100%" margin="60px 0px" buttonTitle="Confirm Sing Up" (onClick)="createNewUser()"></list-me-button>

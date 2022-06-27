@@ -7,13 +7,13 @@
 <ion-content>
   <div class="dashboard-container">
     <div class="dashboard-wrapper">
-      <h1 class="dashboard-title">Hello,<br/>Jonatas!</h1>
+      <h1 class="dashboard-title">Hello,<br/>{{userName}}!</h1>
       <list-me-card>
         <div class="card-content">
           <div class="profile-image"></div>
           <div class="profile-info">
-            <h3 class="card-title">Jonatas Almeida</h3>
-            <p class="card-description">Front-End Developer</p>
+            <h3 class="card-title">{{userProfileName}}</h3>
+            <p class="card-description">Click to edit your profile</p>
           </div>
         </div>
       </list-me-card>
@@ -58,7 +58,7 @@
           </div>
         </list-me-modal>
       </div>
-      <list-me-back-button (onClick)="utilService.goToNextPage('/login')"></list-me-back-button>
+      <list-me-back-button icon="exit-outline" (onClick)="utilService.goToNextPage('/login')"></list-me-back-button>
     </div>
   </div>
 </ion-content>

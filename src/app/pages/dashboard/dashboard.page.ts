@@ -3,6 +3,8 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { ActivitiesService } from 'src/app/services/activities.service';
 import { UserService } from 'src/app/services/user.service';
 import { UtilService } from 'src/app/services/util.service';
+import jwtDecode from 'jwt-decode';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,6 +14,7 @@ import { UtilService } from 'src/app/services/util.service';
 export class DashboardPage implements OnInit {
 
   constructor(
+    private route: Router,
     private activityService: ActivitiesService,
     public utilService: UtilService,
     private userService: UserService
@@ -21,12 +24,20 @@ export class DashboardPage implements OnInit {
   activityTitleCtrl = new FormControl('');
   activityDescriptionCtrl = new FormControl('');
 
+  userName: string;
+  userProfileName: string;
   activitiesList: any = [];
   openModal: boolean;
 
   ngOnInit() {
-    this.getActivities();
-    this.initForm();
+    if(this.userService.userToken) {
+      this.initForm();
+      this.getActivities();
+      this.setUsernameOnInit();
+    }
+    else {
+      this.route.navigateByUrl('/login')
+    }
   }
 
   initForm(): void {
@@ -36,9 +47,19 @@ export class DashboardPage implements OnInit {
     })
   }
 
+  setUsernameOnInit(): void {
+    if(this.userService.userToken) {
+      sessionStorage.setItem('token', this.userService.userToken);
+      let decodedToken: any = jwtDecode(this.userService.userToken);
+
+      this.userName = decodedToken.user_name.toString();
+      this.userProfileName = decodedToken.user_full_name.toString();
+    }
+  }
+
   async getActivities(): Promise<void> {
     try {
-      this.activityService.getAllActivities({ token: this.userService.userToken }).subscribe((activity) => {
+      this.activityService.getAllActivities().subscribe((activity) => {
         if (activity.status === "success") {
           this.activitiesList = activity;
         }
@@ -56,13 +77,18 @@ export class DashboardPage implements OnInit {
   // Create new activity
   async createActivity(): Promise<void> {
     try {
+      let decodedToken: any = jwtDecode(this.userService.userToken);
+
+      console.log(decodedToken)
+
       const payload = {
         activity_title: this.activityTitleCtrl.value,
-        activity_description: this.activityDescriptionCtrl.value
+        activity_description: this.activityDescriptionCtrl.value,
+        user: decodedToken.user_name
       }
 
       this.activityService.postActivity(payload).subscribe((response) => {
-        alert(response.message);
+        // alert(response.message);
         this.limparDados();
         this.openModal = false;
         this.getActivities()

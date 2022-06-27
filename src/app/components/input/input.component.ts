@@ -10,6 +10,7 @@ export class InputComponent implements OnInit {
 
 
   @Input() ctrl = new FormControl('')
+  @Input() formControlName: string;
   @Input() type: string;
   @Input() placeholder: string;
   @Input() minValue: number;

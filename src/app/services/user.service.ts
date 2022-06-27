@@ -21,10 +21,11 @@ export class UserService {
     })
   }
 
-  createUser(userName, userEmail, userPassword): Observable<any> {
+  createUser(userName, userEmail, userFullName, userPassword): Observable<any> {
     return this.http.post<any>(this.baseUrl + "/register", {
       username: userName,
       user_email: userEmail,
+      user_full_name: userFullName,
       user_password: userPassword,
     });
   }

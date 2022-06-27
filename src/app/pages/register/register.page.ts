@@ -16,6 +16,7 @@ export class RegisterPage implements OnInit {
   usernameCtrl = new FormControl('');
   userEmailCtrl = new FormControl('');
   userPasswordCtrl = new FormControl('');
+  userFullNameCtrl = new FormControl('');
   confirmPasswordCtrl = new FormControl('');
 
   openModal: boolean = false;
@@ -34,6 +35,7 @@ export class RegisterPage implements OnInit {
     this.userForm = new FormGroup({
       username: this.usernameCtrl,
       user_email: this.userEmailCtrl,
+      user_full_name: this.userFullNameCtrl,
       user_password: this.userPasswordCtrl,
       confirm_password: this.confirmPasswordCtrl
     });
@@ -51,13 +53,13 @@ export class RegisterPage implements OnInit {
       const payload = {
         username: this.usernameCtrl.value,
         user_email: this.userEmailCtrl.value,
+        user_full_name: this.userFullNameCtrl.value,
         user_password: passwordEnc.toString()
       }
 
-      console.log(payload);
       
       if(this.userPasswordCtrl.value === this.confirmPasswordCtrl.value) {
-        this.userService.createUser(payload.username, payload.user_email, payload.user_password).subscribe(async (data) => {
+        this.userService.createUser(payload.username, payload.user_email, payload.user_full_name, payload.user_password).subscribe(async (data) => {
           // alert(data.message)
           console.log("Carregando...")
           await this.loginUserAfterRegister(payload.username, this.userPasswordCtrl.value);
@@ -86,6 +88,7 @@ export class RegisterPage implements OnInit {
         console.log(user)
         if(user.status == 'success') {
           this.openModal = false;
+          this.userService.userToken = user.token;
           this.route.navigateByUrl('/dashboard')
         }else {
           this.openModal = false;
