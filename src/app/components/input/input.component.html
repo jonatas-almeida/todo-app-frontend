@@ -1,4 +1,4 @@
-<input class="input-container" [formControl]="ctrl" [type]="type" [placeholder]="placeholder" [ngStyle]="{
+<input class="input-container" [formControl]="ctrl" [type]="type" (keydown)="onInputChange($event)" [placeholder]="placeholder" [ngStyle]="{
   width: width,
   margin: margin,
   padding: padding,

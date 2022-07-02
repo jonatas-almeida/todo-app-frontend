@@ -22,9 +22,10 @@
         <h3 class="dashboard-content-title">Activities</h3>
         <div class="dashboard-search-header">
           <div class="search-input">
-            <list-me-input placeholder="Search..." type="text"></list-me-input>
+            <list-me-input placeholder="Search..." [ctrl]="searchCtrl" (onKeyDown)="searchActivityTyping()" type="text"></list-me-input>
+            <list-me-round-button width="30px" height="30px" icon="close" backgroundColor="#0f3f6e" (onClick)="limparCampoBusca()" top="8px" right="10px"></list-me-round-button>
           </div>
-          <list-me-button buttonTitle="Search" width="100px"></list-me-button>
+          
         </div>
         <div class="data-grid-container">
           <list-me-card *ngFor="let activity of activitiesList.data" [key]="activity._id">

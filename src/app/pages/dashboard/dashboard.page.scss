@@ -136,7 +136,10 @@ ion-title {
 }
 
 .search-input {
-    width: 240px;
+    width: 100%;
+    position: relative;
+    top: 0;
+    left: 0;
 }
 
 .modal-activity-name {

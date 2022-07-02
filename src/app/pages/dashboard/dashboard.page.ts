@@ -24,6 +24,8 @@ export class DashboardPage implements OnInit {
   activityTitleCtrl = new FormControl('');
   activityDescriptionCtrl = new FormControl('');
 
+  searchCtrl = new FormControl('');
+
   userName: string;
   userProfileName: string;
   activitiesList: any = [];
@@ -43,7 +45,8 @@ export class DashboardPage implements OnInit {
   initForm(): void {
     this.activityForm = new FormGroup({
       activity_title: this.activityTitleCtrl,
-      activity_description: this.activityDescriptionCtrl
+      activity_description: this.activityDescriptionCtrl,
+      search: this.searchCtrl
     })
   }
 
@@ -78,8 +81,6 @@ export class DashboardPage implements OnInit {
   async createActivity(): Promise<void> {
     try {
       let decodedToken: any = jwtDecode(this.userService.userToken);
-
-      console.log(decodedToken)
 
       const payload = {
         activity_title: this.activityTitleCtrl.value,
@@ -123,6 +124,28 @@ export class DashboardPage implements OnInit {
     }
   }
 
+  async searchActivity(): Promise<void> {
+    try {
+      this.activityService.searchActivity(this.searchCtrl.value).subscribe((result) => {
+        this.activitiesList = result
+      })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  async searchActivityTyping(): Promise<void> {
+    setTimeout(() => {
+      try {
+        this.activityService.searchActivity(this.searchCtrl.value).subscribe((result) => {
+          this.activitiesList = result
+        })
+      } catch (error) {
+        console.log(error)
+      }
+    }, 500);
+  }
+
   // Closes the modal component
   closeModal(event): void {
     if (event.close) {
@@ -130,6 +153,11 @@ export class DashboardPage implements OnInit {
       this.limparDados();
       this.getActivities();
     }
+  }
+
+  limparCampoBusca(): void {
+    this.searchCtrl.setValue('');
+    this.getActivities();
   }
 
   // Clean the modal fields

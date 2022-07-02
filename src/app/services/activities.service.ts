@@ -15,18 +15,18 @@ export class ActivitiesService {
 
   // Get all activities
   getAllActivities(): Observable<any> {
-    return this.http.post<any>(`${this.baseUrl}/todo`, { token: this.userService.userToken });
+    return this.http.get<any>(`${this.baseUrl}/todo`);
+  }
+
+  searchActivity(activityName): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}/todo/${activityName}`, {
+      token: this.userService.userToken
+    })
   }
 
   // Add activity
   postActivity(payload): Observable<any> {
-    const body = {
-      activity_title: payload.activity_title,
-      activity_description: payload.activity_description,
-      user: payload.user,
-      token: this.userService.userToken
-    }
-    return this.http.post<any>(`${this.baseUrl}/todo/new_activity`, body)
+    return this.http.post<any>(`${this.baseUrl}/todo/new_activity`, payload)
   }
 
   // Delete activity

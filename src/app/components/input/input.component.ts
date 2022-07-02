@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 @Component({
@@ -21,8 +21,14 @@ export class InputComponent implements OnInit {
   @Input() padding = '10px';
   @Input() fontSize = '16px';
 
+  @Output() onKeyDown = new EventEmitter();
+
   constructor() { }
 
   ngOnInit() {}
+
+  onInputChange(event): void {
+    this.onKeyDown.emit(event);
+  }
 
 }
