@@ -22,6 +22,7 @@ export class InputComponent implements OnInit {
   @Input() fontSize = '16px';
 
   @Output() onKeyDown = new EventEmitter();
+  @Output() onBlur =  new EventEmitter();
 
   constructor() { }
 
@@ -29,6 +30,10 @@ export class InputComponent implements OnInit {
 
   onInputChange(event): void {
     this.onKeyDown.emit(event);
+  }
+
+  onInputOutFocus(event): void {
+    this.onBlur.emit(event);
   }
 
 }

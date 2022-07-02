@@ -50,6 +50,7 @@ export class DashboardPage implements OnInit {
     })
   }
 
+  // Setta o token no sessionStorage
   setUsernameOnInit(): void {
     if(this.userService.userToken) {
       sessionStorage.setItem('token', this.userService.userToken);
@@ -60,6 +61,8 @@ export class DashboardPage implements OnInit {
     }
   }
 
+
+  // Retorna todas as atividades
   async getActivities(): Promise<void> {
     try {
       this.activityService.getAllActivities().subscribe((activity) => {
@@ -77,7 +80,7 @@ export class DashboardPage implements OnInit {
     }
   }
 
-  // Create new activity
+  // Cria uma nova atividade
   async createActivity(): Promise<void> {
     try {
       let decodedToken: any = jwtDecode(this.userService.userToken);
@@ -101,7 +104,7 @@ export class DashboardPage implements OnInit {
     }   
   }
 
-  // Delete an activity
+  // Deleta uma atividade
   async deleteClickedActivity(activity): Promise<void> {
     const activityId = activity._id;
     const activityName = activity.activity_title;
@@ -124,16 +127,7 @@ export class DashboardPage implements OnInit {
     }
   }
 
-  async searchActivity(): Promise<void> {
-    try {
-      this.activityService.searchActivity(this.searchCtrl.value).subscribe((result) => {
-        this.activitiesList = result
-      })
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
+  // Procurar por uma atividade específica digitando
   async searchActivityTyping(): Promise<void> {
     setTimeout(() => {
       try {
@@ -146,7 +140,7 @@ export class DashboardPage implements OnInit {
     }, 500);
   }
 
-  // Closes the modal component
+  // Fecha o component de modal
   closeModal(event): void {
     if (event.close) {
       this.openModal = false;
@@ -155,12 +149,13 @@ export class DashboardPage implements OnInit {
     }
   }
 
+  // Limpa o campo de busca
   limparCampoBusca(): void {
     this.searchCtrl.setValue('');
     this.getActivities();
   }
 
-  // Clean the modal fields
+  // Limpa os campos do modal de adicionar uma nova atividade
   limparDados(): void {
     this.activityTitleCtrl.setValue('')
     this.activityDescriptionCtrl.setValue('')

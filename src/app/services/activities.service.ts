@@ -18,10 +18,9 @@ export class ActivitiesService {
     return this.http.get<any>(`${this.baseUrl}/todo`);
   }
 
+  // Search an activity
   searchActivity(activityName): Observable<any> {
-    return this.http.post<any>(`${this.baseUrl}/todo/${activityName}`, {
-      token: this.userService.userToken
-    })
+    return this.http.get<any>(`${this.baseUrl}/todo/${activityName}`)
   }
 
   // Add activity

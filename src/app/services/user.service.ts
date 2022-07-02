@@ -7,7 +7,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class UserService {
-  
+
   userToken: any;
 
   baseUrl = environment.API_LOCAL
@@ -29,4 +29,9 @@ export class UserService {
       user_password: userPassword,
     });
   }
+
+  verifyExistingUser(username): Observable<any> {
+    return this.http.get(this.baseUrl + `/todo/search_username/${username}`)
+  }
+
 }

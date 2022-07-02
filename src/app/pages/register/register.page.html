@@ -6,7 +6,10 @@
     <form [formGroup]="userForm">
       <div class="user-info-container">
         <div class="user-info-section-one">
-          <list-me-input placeholder="User name" [ctrl]="usernameCtrl" type="text"></list-me-input>
+          <list-me-input (onBlur)="verifyUser()" placeholder="User name" [ctrl]="usernameCtrl" type="text"></list-me-input>
+          <p style="font-size: 8pt; margin-top: 10px;" [ngStyle]="{
+            color: isUserAvailable?.available ? 'green' : 'red'
+          }">{{ isUserAvailabeMessage ? isUserAvailabeMessage : '' }}</p>
         </div>
         <div class="user-info-section-one">
           <list-me-input placeholder="E-mail" [ctrl]="userEmailCtrl" type="email"></list-me-input>
