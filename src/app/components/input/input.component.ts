@@ -20,6 +20,7 @@ export class InputComponent implements OnInit {
   @Input() margin = '0px';
   @Input() padding = '10px';
   @Input() fontSize = '16px';
+  @Input() userExists = true;
 
   @Output() onKeyDown = new EventEmitter();
   @Output() onBlur =  new EventEmitter();

@@ -49,7 +49,7 @@ export class RegisterPage implements OnInit {
 
     try {
 
-      if(this.isUserAvailable.available) {
+      if(this.isUserAvailable.available == true) {
         const salt = bcrypt.genSaltSync(10);
         const passwordEnc = bcrypt.hashSync(this.userPasswordCtrl.value, salt) 
 

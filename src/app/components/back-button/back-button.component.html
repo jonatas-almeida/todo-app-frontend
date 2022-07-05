@@ -1,3 +1,7 @@
-<div class="btn-back-container" (click)="goBackClick()">
-  <ion-icon [name]="icon"></ion-icon>
+<div class="btn-back-container" (click)="goBackClick()" [ngStyle]="{
+  backgroundColor: backgroundColor
+}">
+  <ion-icon [name]="icon" [ngStyle]="{
+    color: iconColor
+  }"></ion-icon>
 </div>

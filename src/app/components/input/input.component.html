@@ -1,6 +1,17 @@
-<input class="input-container" [formControl]="ctrl" [type]="type" (keydown)="onInputChange($event)" [placeholder]="placeholder" (blur)="onInputOutFocus($event)" [ngStyle]="{
-  width: width,
-  margin: margin,
-  padding: padding,
-  fontSize: fontSize
-}"/>
+<div class="input-container-wrapper">
+  <input class="input-container" [formControl]="ctrl" [type]="type" (keydown)="onInputChange($event)"
+    [placeholder]="placeholder" (blur)="onInputOutFocus($event)" [ngStyle]="{
+    width: width,
+    margin: margin,
+    padding: padding,
+    fontSize: fontSize,
+    borderColor: userExists == false && this.ctrl.value != '' ? '#e93232' : '#000'
+  }" />
+  <div class="user-exists" *ngIf="userExists == false && this.ctrl.value != ''" [ngStyle]="{
+    backgroundColor: userExists == false ? '#e93232' : 'transparent'
+  }">
+    <div class="user-exist-message" >
+      <p>Usuário já existe</p>
+    </div>
+  </div>
+</div>

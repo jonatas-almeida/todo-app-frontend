@@ -8,6 +8,8 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 export class BackButtonComponent implements OnInit {
 
   @Input() icon = 'arrow-back-outline';
+  @Input() backgroundColor = "#222";
+  @Input() iconColor = "#3cdda8";
 
   @Output() onClick = new EventEmitter();
 

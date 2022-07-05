@@ -1,13 +1,54 @@
+.input-container-wrapper {
+    width: auto;
+    height: auto;
+    display: flex;
+    align-items: center;
+    position: relative;
+    top: 0;
+    left: 0;
+}
+
 .input-container {
     width: 100% !important;
-    border: 1px solid #d4d4d4;
+    border: 1px solid #000;
     border-radius: 5px;
     outline: none;
     transition: all .3s;
-    background: #fcfcfc;
+    background: #363636;
+    color: #ccc;
 }
 
 .input-container:focus {
-    border: 1px solid #41fa78;
+    border: 1px solid #3cdda8;
     box-shadow: 0px 5px 15px rgba($color: #000000, $alpha: 0.1);
+}
+
+.user-exists {
+    width: 12px;
+    height: 12px;
+    background: #3cdda8;
+    border-radius: 50%;
+    position: absolute;
+    top: 18px;
+    right: 10px;
+    transition: all .3s;
+    z-index: 99;
+}
+
+.user-exist-message {
+    width: 200px;
+    font-size: 10pt;
+    background: #e93232;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0px 5px 10px rgba($color: #000000, $alpha: 0.1);
+    text-align: center;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.user-exist-message p {
+    font-weight: bold;
+    color: #fff;
 }

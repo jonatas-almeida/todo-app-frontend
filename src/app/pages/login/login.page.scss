@@ -8,7 +8,7 @@
 .login-container {
     width: 100% !important;
     height: 100vh !important;
-    background: #fff;
+    background: #222;
 }
 
 .login-wrapper {
@@ -24,7 +24,8 @@
 .login-wrapper h1 {
     font-size: 40pt;
     font-weight: bold;
-    color: #0f3f6e;
+    color: #3cdda8;
+    margin-bottom: 30px;
 }
 
 .login-wrapper h3 {
@@ -38,13 +39,4 @@
     justify-content: space-between;
     margin-top: 30px;
     margin-bottom: 20px;
-}
-
-.login-divider {
-    width: 40px;
-    height: 10px;
-    background: #e4bf95;
-    border-radius: 30px;
-    margin-top: 10px;
-    margin-bottom: 30px;
 }

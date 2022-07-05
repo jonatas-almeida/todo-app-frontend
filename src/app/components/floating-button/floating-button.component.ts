@@ -8,6 +8,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 export class FloatingButtonComponent implements OnInit {
 
   @Input() icon = 'add-outline';
+  @Input() iconColor = '#3cdda8';
   @Input() backgroundColor = '#0f3f6e';
 
   @Output() onClick = new EventEmitter();

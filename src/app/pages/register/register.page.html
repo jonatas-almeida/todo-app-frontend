@@ -1,15 +1,14 @@
 <div class="register-container">
   <div class="register-wrapper">
     <h1>Register</h1>
-    <hr class="register-divider">
     <form [formGroup]="userForm">
       <div class="user-info-container">
         <div class="user-info-section-one">
-          <list-me-input (onBlur)="verifyUser()" placeholder="User name" [ctrl]="usernameCtrl" type="text">
+          <list-me-input (onBlur)="verifyUser()" placeholder="User name" [ctrl]="usernameCtrl" [userExists]="this.isUserAvailable ? this.isUserAvailable.available : null" type="text">
           </list-me-input>
-          <p style="font-size: 8pt; margin-top: 10px;" [ngStyle]="{
+          <!-- <p style="font-size: 8pt; margin-top: 10px;" [ngStyle]="{
             color: isUserAvailable?.available ? 'green' : 'red'
-          }" *ngIf="this.isUserAvailabeMessage != '' ">{{ isUserAvailabeMessage ? isUserAvailabeMessage : '' }}</p>
+          }" *ngIf="this.isUserAvailabeMessage != '' ">{{ isUserAvailabeMessage ? isUserAvailabeMessage : '' }}</p> -->
         </div>
         <div class="user-info-section-one">
           <list-me-input placeholder="E-mail" [ctrl]="userEmailCtrl" type="email"></list-me-input>
@@ -20,11 +19,12 @@
       }"></list-me-input>
       <list-me-input placeholder="Password" [ctrl]="userPasswordCtrl" margin="20px 0px" type="password"></list-me-input>
       <list-me-input placeholder="Confirm password" [ctrl]="confirmPasswordCtrl" type="password"></list-me-input>
-      <list-me-button width="100%" margin="60px 0px" buttonTitle="Confirm Sing Up" (onClick)="createNewUser()">
+
+      <list-me-button width="100%" margin="60px 0px" buttonTitle="Confirm Sign Up" (onClick)="createNewUser()" backgroundColor="#3cdda8" fontColor="#222">
       </list-me-button>
     </form>
   </div>
-  <list-me-back-button (onClick)="utilService.goToNextPage('/login')"></list-me-back-button>
+  <list-me-back-button (onClick)="utilService.goToNextPage('/login')" backgroundColor="#000" iconColor="#3cdda8"></list-me-back-button>
 </div>
 
 <list-me-loading loadingText="Loading..." [open]="openModal"></list-me-loading>
