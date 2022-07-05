@@ -153,7 +153,7 @@ export class DashboardPage implements OnInit {
         this.activityService.updateActivity(this.activityId, body).subscribe(
           (response) => {
             console.log(response)
-            this.openModal = false;
+            this.limparDados();
             this.getActivities();
           }, error => {
             console.log(error)
