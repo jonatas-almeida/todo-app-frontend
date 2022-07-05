@@ -1,4 +1,4 @@
-<div class="card-container" [accessKey]="key">
+<div class="card-container" [accessKey]="key" (click)="onCardClick($event)">
   <div class="card-wrapper">
     <ng-content></ng-content>
   </div>

@@ -23,6 +23,7 @@ export class DashboardPage implements OnInit {
   activityForm: FormGroup;
   activityTitleCtrl = new FormControl('');
   activityDescriptionCtrl = new FormControl('');
+  activityId: any;
 
   searchCtrl = new FormControl('');
 
@@ -30,9 +31,10 @@ export class DashboardPage implements OnInit {
   userProfileName: string;
   activitiesList: any = [];
   openModal: boolean;
+  isEditing: boolean;
 
   ngOnInit() {
-    if(this.userService.userToken) {
+    if (this.userService.userToken) {
       this.initForm();
       this.getActivities();
       this.setUsernameOnInit();
@@ -52,7 +54,7 @@ export class DashboardPage implements OnInit {
 
   // Setta o token no sessionStorage
   setUsernameOnInit(): void {
-    if(this.userService.userToken) {
+    if (this.userService.userToken) {
       sessionStorage.setItem('token', this.userService.userToken);
       let decodedToken: any = jwtDecode(this.userService.userToken);
 
@@ -101,7 +103,7 @@ export class DashboardPage implements OnInit {
       })
     } catch (error) {
       console.log(error)
-    }   
+    }
   }
 
   // Deleta uma atividade
@@ -110,18 +112,18 @@ export class DashboardPage implements OnInit {
     const activityName = activity.activity_title;
 
     try {
-      const message = confirm(`Do you want to delete '${activityName}'?`).valueOf()
+      // const message = confirm(`Do you want to delete '${activityName}'?`).valueOf()
 
-      if (message) {
+      //if (message) {
         this.activityService.deleteActivity(activityId).subscribe(
           (response) => {
-            alert(response.message);
+            this.limparDados();
             this.getActivities();
           }, err => {
             console.log(err)
           }
         )
-      }
+      //}
     } catch (error) {
       console.log(error)
     }
@@ -138,6 +140,40 @@ export class DashboardPage implements OnInit {
         console.log(error)
       }
     }, 500);
+  }
+
+  async updateActivityInfo(): Promise<void> {
+    try {
+      if (this.activityForm.valid) {
+        const body = {
+          activity_title: this.activityTitleCtrl.value,
+          activity_description: this.activityDescriptionCtrl.value
+        }
+
+        this.activityService.updateActivity(this.activityId, body).subscribe(
+          (response) => {
+            console.log(response)
+            this.openModal = false;
+            this.getActivities();
+          }, error => {
+            console.log(error)
+          })
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  // Abre o modal de edição
+  openEditModal(todoItem): void {
+    if (todoItem) {
+      this.openModal = true;
+      this.isEditing = true;
+
+      this.activityId = todoItem._id;
+      this.activityTitleCtrl.setValue(todoItem.activity_title)
+      this.activityDescriptionCtrl.setValue(todoItem.activity_description)
+    }
   }
 
   // Fecha o component de modal
@@ -157,6 +193,8 @@ export class DashboardPage implements OnInit {
 
   // Limpa os campos do modal de adicionar uma nova atividade
   limparDados(): void {
+    this.isEditing = false;
+    this.openModal = false;
     this.activityTitleCtrl.setValue('')
     this.activityDescriptionCtrl.setValue('')
   }

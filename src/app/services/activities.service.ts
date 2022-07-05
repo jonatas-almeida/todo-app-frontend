@@ -28,6 +28,11 @@ export class ActivitiesService {
     return this.http.post<any>(`${this.baseUrl}/todo/new_activity`, payload)
   }
 
+  // Update activity
+  updateActivity(id, payload): Observable<any> {
+    return this.http.patch<any>(`${this.baseUrl}/todo/${id}`, payload)
+  }
+
   // Delete activity
   deleteActivity(activityId): Observable<any> {
     return this.http.delete<any>(`${this.baseUrl}/todo/${activityId}`);

@@ -28,7 +28,7 @@
           
         </div>
         <div class="data-grid-container">
-          <list-me-card *ngFor="let activity of activitiesList.data" [key]="activity._id">
+          <list-me-card *ngFor="let activity of activitiesList.data" [key]="activity._id" (onClick)="openEditModal(activity)">
             <div class="card-dashboard-content">
               <div class="dashboard-profile-image"></div>
               <div class="dashboard-profile-info">
@@ -42,7 +42,7 @@
         <list-me-floating-button (onClick)="this.openModal = true"></list-me-floating-button>
 
         <!-- Modal => add activity -->
-        <list-me-modal modalTitle="Add activity" [isModalOpen]="openModal" (closeModal)="closeModal($event)">
+        <list-me-modal [modalTitle]="isEditing ? 'Edit activity' : 'Add activity'" [isModalOpen]="openModal" (closeModal)="closeModal($event)">
           <form [formGroup]="activityForm">
             <div class="modal-activity-name">
               <label class="modal-label">Activity name:</label>
@@ -54,7 +54,8 @@
             </div>
           </form>
           <div class="modal-action-buttons">
-            <list-me-button buttonTitle="Add" width="100px" (onClick)="createActivity()"></list-me-button>
+            <list-me-button buttonTitle="Add" width="100px" (onClick)="createActivity()" *ngIf="!isEditing"></list-me-button>
+            <list-me-button buttonTitle="Update" width="100px" (onClick)="updateActivityInfo()" *ngIf="isEditing"></list-me-button>
             <list-me-button buttonTitle="Cancel" (onClick)="this.openModal = false" backgroundColor="#f2f2f2" fontColor="#222"></list-me-button>
           </div>
         </list-me-modal>
