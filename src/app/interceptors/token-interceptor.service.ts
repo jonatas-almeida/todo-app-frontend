@@ -13,8 +13,10 @@ export class TokenInterceptorService implements HttpInterceptor {
   constructor(private userAuth: UserService, private route: Router) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    // Pega o token do usuário
     const token = this.userAuth.userToken;
 
+    // Se o token existir envia o token no header da requisição
     if(token) {
       request = request.clone({
         setHeaders: {
@@ -23,6 +25,7 @@ export class TokenInterceptorService implements HttpInterceptor {
       });
     }
     return next.handle(request).pipe(
+      // Caso exista algum erro envia o erro de Unauthorized
       catchError((err) => {
         if(err.status === 401) {
           this.route.navigateByUrl('/login')
